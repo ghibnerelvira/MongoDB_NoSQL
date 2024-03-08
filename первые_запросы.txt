@@ -1,0 +1,72 @@
+--- Добавление юзеров - Добавление ---
+db.users.insertMany([
+    { fullname: 'Mari Petrova', country: 'Germany'},
+    { fullname: 'Max Mustermann', country: 'Germany'}
+])
+
+--- Вывести всех юзеров - Просмотор ---
+db.users.find()
+
+
+--- Добавить одного юзера ---
+db.users.insertOne(
+    { fullname: 'Mr. B', country: 'Finnland' }
+)
+
+
+--- Вывести юзеров из USA ---
+db.users.find(
+    { country: 'USA' }  // filter
+)
+
+// без страны
+db.users.find(
+    { country: 'USA' }, // filter
+    { country: 0 } // projection
+)
+
+// только имя
+db.users.find(
+    { country: 'USA' }, // filter
+    { fullname: 1, _id: 0 } // projection
+)
+
+// 1 - включить
+// 0 - исключить
+
+
+
+--- Вывести страны всех юзеров ---
+db.users.find(
+    {}, // filter
+    { country: 1, _id: 0 } // projection
+)
+
+
+--- Вывести имена юзеров из `Germany` ---
+db.users.find(
+    { country: 'Germany' }
+    { fullname: 1, _id: 0 } 
+)
+
+--- Вывести страну юзера с id ObjectId("65e8471eb0cf085e5c4f5442") ---
+db.users.findOne(
+    { _id: ObjectId("65e8471eb0cf085e5c4f5442") },
+    { country: 1, _id: 0 }
+)
+
+
+
+---  Добавить два трека (tracks) ---
+db.tracks.insertMany([
+    { title: 'MusikTrackname1', duration_secs: NumberInt(195)},
+    { title: 'MusikTrackname2', duration_secs: NumberInt(196)}
+])
+
+2.
+db.tracks.insertMany([
+    { title: 'Track 1', duration_secs: 5 * 60},
+    { title: 'Track 2', duration_secs: 4 * 60}
+])
+--- Просмотор ---
+db.tracks.find()

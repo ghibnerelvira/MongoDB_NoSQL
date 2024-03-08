@@ -1,0 +1,211 @@
+
+URI для подключения
+mongodb+srv://abab:MOnM0LLj38AEqPIY@telran.2nqjveq.mongodb.net/admin?retryWrites=true&replicaSet=atlas-14l424-shard-0&readPreference=primary&srvServiceName=mongodb&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1&3t.uriVersion=3&3t.connection.name=atlas-14l424-shard-0&3t.databases=admin&3t.alwaysShowAuthDB=true&3t.alwaysShowDBFromUserRole=true&3t.sslTlsVersion=TLS
+
+URL для подключения
+mongodb://abab:MOnM0LLj38AEqPIY@ac-e8xhcsc-shard-00-00.2nqjveq.mongodb.net:27017,ac-e8xhcsc-shard-00-01.2nqjveq.mongodb.net:27017,ac-e8xhcsc-shard-00-02.2nqjveq.mongodb.net:27017/admin?ssl=true&retryWrites=true&replicaSet=atlas-14l424-shard-0&readPreference=primary&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1
+
+
+
+
+MongoDB - Документная база данных
+
+Кто использует MongoDB? -> Taobao.com, Forbes, bit.ly, github Social Coding, Disney, Mtv, SAP....
+
+MongoDB используется на разных языках - Java, C++ Phyton,JavaScript unsw.
+- Быстрая база данных (С++)
+- Устоявшийся проект, используется в промышленных решениях
+- Open-source
+- Одно из наиболее универсальных решений
+- Динамическая схема данных
+
+
+
+------ Базовые структуры данных ------
+
+1. Скаляр (единичное значение)
+2. Массив (упорядоченный список)
+3. Ассоц/массив (карта, объект, словарь) - набор пар “ключ-значение”
+4. Множество (список уникальных значений)
+
+    // пример
+    users = [
+        {username: 'hacker', email: '123@example.org', is_blocked: true},
+        {username: 'user1', email: 'hello@example.org', phone: '+0000000000'}
+    ]
+
+
+
+------ Организация данных ------
+        SQL            MongoDB
+    База данных      База данных 
+      Таблица         Коллекция
+    Строка/запись      Документ
+
+
+
+
+------ Преимущества ------
+    1.Документно-ориентированная база данных
+    2.Быстрое чтение и особенно запись (быстрая робота)
+    3.Широкая по сравнению с другими NOSQL функциональсть
+    4.Масштабирование из коробки (всё золожено сразу в СБД)
+        По чтению (Master/slave, Replica sets)
+        По записи (Sharding)
+
+
+
+
+------ Подключение в Java ------
+    import com.mongodb. Mongo;
+    import com.mongodb.DB;
+    import com.mongodb.DBCollection;
+    import. com.mongodb.Basicdbobject;
+    import com.mongodb.DBObject;
+    import .com.mongodb.DBCursor;
+            Mongo m = new Mongo ();
+        // or
+            Mongo m = new Mongo( "localhost" );
+        //or
+            Mongo m = new Mongo( "localhost" , 27017 );
+            DB db = m.getDB( "mydb" );
+
+
+
+UUID
+------ Ключ ------
+Каждому добавленному документу автоматически предоставляется уникальный ключ
+        _id: ObjectId("47cc67093475061e3d95369d")
+
+
+-------- JSON -------
+JSON - формат хранение данных в текстовым виде или биннарные если JSON Binary -BSON для передачи данных между Front-end и Backend 
+
+
+---------- Принципиальные отличия MongoDB от RDBMS ----------
+
+1. Другой язык для выполнения запросов (NoSQL - QUERY API)
+2. Модель данных - ДОКУМЕНТНАЯ (документ - ассоц/массив)
+3. Динамическая схема данных (без схемы, schemaless) - каждый документ может иметь свой набор полей
+4. Использует JSON и Binary JSON (BSON)
+5. Позволяет хранить вложенные структуры данных
+
+
+
+
+----------  JSON / XML ----------
+======== XML ========                                                
+<empinfo>
+    <employees> 
+      <employee>
+        <name>James Kirk</name> 
+        <age>40></age>
+    </employee> 
+    <employee>
+        <name>Jean-Luc Picard</name> <age>45</age>
+    </employee> 
+    <employee>
+        <name>Wesley Crusher</name> <age>27</age>
+    </employee> 
+    </employees>
+</empinfo>
+
+
+======== JSON ========
+{ "empinfo" :
+    { 
+        "employees" : [
+        {
+            "name": "James Kirk",
+            "age": 40,
+        },
+        {
+            "name": "Jean-Luc Picard",
+            "age": 45,
+        },
+        {
+            "name": "Wesley Crusher",
+            "age": 27,
+        }
+                        ]
+    }
+}
+
+
+
+
+
+---------- Категории запросов ----------
+
+1. `CRUD` - более простые запросы
+2. Aggregation - получение вычисленных данных
+
+
+
+
+
+
+--------- MongoDB: CRUD ---------
+
+==== Create ====
+
+- `insertOne()` добавить один документ
+    - один аргумент
+        - ассоц/массив (объект)
+- `insertMany()` добавить несколько документов
+    - один аргумент
+        - массив ассоц/массивов (документов)
+
+
+==== Read ====
+
+- `findOne()`  найти (выбрать) один документ
+- `find()` найти (выбрать) несколько документов
+    - аргументы
+        - `filter`
+        - `projection`
+- `countDocuments()` ко-во совпадений
+    - аргументы
+        - `filter`
+
+
+
+==== Update ====
+
+- `updateOne()` изменить один документ
+- `updateMany()` изменить несколько документов
+    - аргументы
+        - `filter`
+        - `action`
+
+
+
+==== Delete ====
+
+- `deleteOne()` удалить один документ
+- `deleteMany()` удалить несколько документов
+    - аргументы
+        - `filter`
+
+
+
+
+----------------- Интернет-магазин ---------------
+
+    Регистрация клиента    - insertOne()
+    Поиск товаров          - find()
+    Просмотр карточки товара    - findOne()
+    Добавить заказ          - insertOne()
+    Оплатить заказ          - updateOne()
+    Заблокировать клиента   - updateOne()
+    Увеличить стоимость всех товаров    - updateMany()
+    Удалить старые записи тел/ разговоров   - deleteMany()
+    Положить товар в корзину     - insertOne()
+    Авторизация клиента     - find()
+
+
+
+
+------------- Механизм сетевых портов -------------
+
+- сетевой порт - сетевой идентификатор процесса (программа)
